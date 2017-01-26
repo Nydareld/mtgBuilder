@@ -5,25 +5,38 @@
         <item android:title="Cartes">
             <menu>
                 <item
-                    android:id="@+id/nav"
-                    android:icon="@mipmap/ic_launcher"
-                    android:title="Couleurs" />
-
+                    android:id="@+id/liste_cartes"
+                    android:icon="@drawable/ic_action_card"
+                    android:title="Liste des cartes" />
+                <item
+                    android:id="@+id/recherche_cartes"
+                    android:icon="@drawable/ic_action_card"
+                    android:title="Rechercher une carte" />
             </menu>
         </item>
     </group>
-
-    <item android:title="Decks">
-        <menu>
-            <item
-                android:id="@+id/nav_share"
-                android:icon="@mipmap/ic_launcher"
-                android:title="Mes decks" />
-            <item
-                android:id="@+id/nav_send"
-                android:icon="@mipmap/ic_launcher"
-                android:title="Nouveau" />
-        </menu>
-    </item>
-
+    <group android:checkableBehavior="single">
+        <item android:title="Decks">
+            <menu>
+                <item
+                    android:id="@+id/liste_decks"
+                    android:icon="@drawable/ic_action_deck"
+                    android:title="Liste des decks" />
+                <item
+                    android:id="@+id/creer_deck"
+                    android:icon="@drawable/ic_action_deck"
+                    android:title="Ajouter un deck" />
+            </menu>
+        </item>
+    </group>
+    <group android:checkableBehavior="single">
+        <item android:title="Outils">
+            <menu>
+                <item
+                    android:id="@+id/compteur_vie"
+                    android:icon="@drawable/ic_action_count"
+                    android:title="Compteur pts de vie" />
+            </menu>
+        </item>
+    </group>
 </menu>

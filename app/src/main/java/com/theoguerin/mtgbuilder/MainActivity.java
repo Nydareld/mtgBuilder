@@ -76,7 +76,14 @@ public class MainActivity extends AppCompatActivity
         if (id == R.id.creer_deck) {
             Intent intent = new Intent(this, CreateDeckActivity.class);
             startActivity(intent);
-
+        }
+        else if (id == R.id.liste_decks) {
+            Intent intent = new Intent(this, DeckListActivity.class);
+            startActivity(intent);
+        }
+        else if (id == R.id.menu_home) {
+            Intent intent = new Intent(this, MainActivity.class);
+            startActivity(intent);
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

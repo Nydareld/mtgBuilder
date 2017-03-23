@@ -5,6 +5,16 @@
         <item android:title="Cartes">
             <menu>
                 <item
+                    android:id="@+id/menu_home"
+                    android:icon="@drawable/ic_action_name"
+                    android:title="Accueil" />
+            </menu>
+        </item>
+    </group>
+    <group android:checkableBehavior="single">
+        <item android:title="Cartes">
+            <menu>
+                <item
                     android:id="@+id/liste_cartes"
                     android:icon="@drawable/ic_action_card"
                     android:title="Liste des cartes" />

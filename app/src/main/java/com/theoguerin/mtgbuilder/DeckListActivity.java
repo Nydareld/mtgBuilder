@@ -2,9 +2,7 @@ package com.theoguerin.mtgbuilder;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
-import android.support.design.widget.Snackbar;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -13,14 +11,23 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ListView;
+import android.widget.Toast;
 
-public class MainActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
+import java.util.ArrayList;
 
+/**
+ * Created by olivier on 27/01/17.
+ */
+
+public class DeckListActivity  extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.deck_list);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -33,6 +40,30 @@ public class MainActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+        final InterractionBD db = new InterractionBD(getBaseContext());
+        ListView liste = (ListView) findViewById(R.id.deck_list);
+        final ArrayList<Deck> listeDecks = db.getDecks();
+        final DeckListAdapter adapter = new DeckListAdapter(this, listeDecks);
+        liste.setAdapter(adapter);
+        liste.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                Toast.makeText(getBaseContext(), "Click on : "+ ((Deck)adapterView.getItemAtPosition(i)).getNom(), Toast.LENGTH_SHORT).show();
+            }
+        });
+        liste.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> adapterView, View view, int i, long l) {
+                Deck d = ((Deck)adapterView.getItemAtPosition(i));
+                db.deleteDeck(d);
+                DeckListAdapter listAdapter = (DeckListAdapter) adapterView.getAdapter();
+                listAdapter.remove(d);
+                listAdapter.notifyDataSetChanged();
+                Toast.makeText(getBaseContext(),d.getNom() + " deleted", Toast.LENGTH_SHORT).show();
+                return true;
+            }
+        });
+
     }
 
     @Override
@@ -91,3 +122,4 @@ public class MainActivity extends AppCompatActivity
         return true;
     }
 }
+
